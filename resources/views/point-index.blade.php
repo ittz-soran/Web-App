@@ -1,8 +1,6 @@
 <div>
     <div class="container">
 
-        
-
         <livewire:CraetePoint />
         <input type="text" wire:model.live.debounce.250ms="search">
         @if (session('status'))
