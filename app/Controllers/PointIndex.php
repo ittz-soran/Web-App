@@ -5,10 +5,11 @@ namespace App\Controllers;
 use App\Models\Points;
 use Livewire\Component;
 
-class Welcome extends Component
+class PointIndex extends Component
 {
+    
     public $number=0;
-    public $paginate=8;
+    public $paginate=4;
     public $search='';
     protected $queryString=['search'];
     public function increment(){
@@ -40,14 +41,9 @@ class Welcome extends Component
 
         $point->update($validatedData);
     }
-   
-
-    
     public function render()
     {
-        $points = Points::where('name','Like','%'.$this->search.'%')->orWhere('address','Like','%'.$this->search.'%')->latest()->paginate($this->paginate);
-        
-        return view('welcome', ['points' => $points])->extends('layouts.app');
-
+        $data = Points::where('name','Like','%'.$this->search.'%')->orWhere('address','Like','%'.$this->search.'%')->latest()->paginate($this->paginate);
+        return view('point-index',['points'=>$data])->extends('layouts.app');;
     }
 }
